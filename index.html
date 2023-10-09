@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Thin-shell object manipulations with differentiable physics simulations.">
+  <meta name="keywords" content="ThinShellLab, Simulation, Robotics">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Thin-shell Object Manipulations with Differentiable Physics Simulations</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+<!-- 
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://keunhong.com">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://hypernerf.github.io">
+            HyperNeRF
+          </a>
+          <a class="navbar-item" href="https://nerfies.github.io">
+            Nerfies
+          </a>
+          <a class="navbar-item" href="https://latentfusion.github.io">
+            LatentFusion
+          </a>
+          <a class="navbar-item" href="https://photoshape.github.io">
+            PhotoShape
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav> -->
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Thin-shell Object Manipulations with Differentiable Physics Simulations</h1>
+          <!-- <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://keunhong.com">Keunhong Park</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://utkarshsinha.com">Utkarsh Sinha</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://jonbarron.info">Jonathan T. Barron</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="http://sofienbouaziz.com">Sofien Bouaziz</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.danbgoldman.com">Dan B Goldman</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://homes.cs.washington.edu/~seitz/">Steven M. Seitz</a><sup>1,2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="http://www.ricardomartinbrualla.com">Ricardo Martin-Brualla</a><sup>2</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>University of Washington,</span>
+            <span class="author-block"><sup>2</sup>Google Research</span>
+          </div> -->
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Under Double-Blind Review</span>
+          </div>
+
+          <!-- <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2011.12948"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2011.12948"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/google/nerfies"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>
+            </div>
+
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/teaser.mp4"
+                type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">
+        <span class="dnerf">Nerfies</span> turns selfie videos from your phone into
+        free-viewpoint
+        portraits.
+      </h2>
+    </div>
+  </div>
+</section> -->
+
+<section class="hero is-light">
+  <div class="hero-body has-text-centered">
+    <p> Under Construction </p>
+    <p> Teaser Image / Video Here </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-full-hd">
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <h2 class="title is-3 has-text-centered">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            In this work, we aim to teach robots to manipulate various thin-shell materials.
+            Prior works studying thin-shell object manipulation mostly rely on heuristic policies or learn policies from
+            real-world video demonstrations, and only focus on limited material types and tasks (<i>e.g.</i> cloth
+            unfolding).
+            However, these approaches face significant challenges when extended to a wider variety of thin-shell
+            materials and a
+            diverse range of tasks.
+            On the other hand, while virtual simulations are shown to be effective in diverse robot skill learning and
+            evaluation,
+            prior thin-shell simulation environments only support a subset of thin-shell materials, which also limits
+            their
+            supported range of tasks.
+          </p>
+          <p>
+            To fill in this gap, we introduce <strong>ThinShellLab</strong> - a fully differentiable simulation platform
+            tailored
+            for
+            robotic
+            interactions with diverse thin-shell materials possessing varying material properties, enabling flexible
+            thin-shell
+            manipulation skill learning and evaluation. Building on top of our developed simulation engine, we design a
+            diverse
+            set
+            of manipulation tasks centered around different thin-shell objects. Our experiments suggest that
+            manipulating
+            thin-shell
+            objects presents several unique challenges: 1) thin-shell manipulation relies heavily on frictional forces
+            due to
+            the
+            objects' co-dimensional nature, 2) the materials being manipulated are highly sensitive to minimal
+            variations in
+            interaction actions, and 3) the constant and frequent alteration in contact pairs makes trajectory
+            optimization
+            methods
+            susceptible to local optima, and neither standard reinforcement learning algorithms nor trajectory
+            optimization
+            methods
+            (either gradient-based or gradient-free) are able to solve the tasks alone. To overcome these challenges, we
+            present
+            an
+            optimization scheme that couples sampling-based trajectory optimization and gradient-based optimization,
+            boosting
+            both
+            learning efficiency and converged performance across various proposed tasks. In addition, the differentiable
+            nature
+            of
+            our platform facilitates a smooth sim-to-real transition. By tuning simulation parameters with a minimal set
+            of
+            real-world data, we demonstrate successful deployment of the learned skills to real-robot settings. Our
+            source code
+            will
+            be publicly available.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container is-full-hd">
+  <hr class="solid">
+</div>
+
+<section class="section">
+  <div class="container is-full-hd">
+    <h2 class="title is-3 has-text-centered">Manipulation Tasks</h2>
+
+    <div class="columns is-centered has-text-centered">
+
+      <div class="column is-3">
+        <video id="matting-video" autoplay muted loop height="100%">
+          <source src="./static/videos/balance_1.mp4" type="video/mp4">
+        </video>
+        <h3 class="title is-4 has-text-justified"> Balancing </h3>
+      </div>
+
+      <div class="column is-3">
+        <video id="matting-video" autoplay muted loop height="100%">
+          <source src="./static/videos/balance_0.mp4" type="video/mp4">
+        </video>
+        <h3 class="title is-4 has-text-justified"> Throwing </h3>
+      </div>
+
+      <div class="column is-3">
+        <video id="matting-video" autoplay muted loop height="100%">
+          <source src="./static/videos/push.mp4" type="video/mp4">
+        </video>
+        <h3 class="title is-4 has-text-justified"> Forming </h3>
+      </div>
+
+    </div>
+
+    <div class="columns is-centered has-text-centered">
+
+      <div class="column is-3">
+        <video id="matting-video" autoplay muted loop height="100%">
+          <source src="./static/videos/interact_0.mp4" type="video/mp4">
+        </video>
+        <h3 class="title is-4 has-text-justified"> Following </h3>
+      </div>
+
+      <div class="column is-3">
+        <video id="matting-video" autoplay muted loop height="100%">
+          <source src="./static/videos/interact_1.mp4" type="video/mp4">
+        </video>
+        <h3 class="title is-4 has-text-justified"> Separating </h3>
+      </div>
+
+      <div class="column is-3">
+        <video id="matting-video" autoplay muted loop height="100%">
+          <source src="./static/videos/interact_soft.mp4" type="video/mp4">
+        </video>
+        <h3 class="title is-4 has-text-justified"> Separating-Cloth </h3>
+      </div>
+
+    </div>
+
+    <div class="columns is-centered has-text-centered">
+
+      <div class="column is-3">
+        <video id="matting-video" autoplay muted loop height="100%">
+          <source src="./static/videos/pick.mp4" type="video/mp4">
+        </video>
+        <h3 class="title is-4 has-text-justified"> Pick-Folding </h3>
+      </div>
+
+      <div class="column is-3">
+        <video id="matting-video" autoplay muted loop height="100%">
+          <source src="./static/videos/folding_0.mp4" type="video/mp4">
+        </video>
+        <h3 class="title is-4 has-text-justified"> Folding-Lower </h3>
+      </div>
+
+      <div class="column is-3">
+        <video id="matting-video" autoplay muted loop height="100%">
+          <source src="./static/videos/folding_1.mp4" type="video/mp4">
+        </video>
+        <h3 class="title is-4 has-text-justified"> Folding-Upper </h3>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-full-hd">
+    <h2 class="title is-3 has-text-centered">Inverse Design Tasks</h2>
+
+    <div class="columns is-centered has-text-centered">
+
+      <div class="column is-3">
+        <video id="matting-video" autoplay muted loop height="100%">
+          <source src="./static/videos/table.mp4" type="video/mp4">
+        </video>
+        <h3 class="title is-4 has-text-justified"> Bouncing </h3>
+      </div>
+
+      <div class="column is-3">
+        <video id="matting-video" autoplay muted loop height="100%">
+          <source src="./static/videos/card.mp4" type="video/mp4">
+        </video>
+        <h3 class="title is-4 has-text-justified"> Card </h3>
+      </div>
+
+    </div>
+
+    <div class="columns is-centered has-text-centered">
+
+      <div class="column is-3">
+        <video id="matting-video" autoplay muted loop height="100%">
+          <source src="./static/videos/slide_0.mp4" type="video/mp4">
+        </video>
+        <h3 class="title is-4 has-text-justified"> Sliding-All-Layers </h3>
+      </div>
+
+      <div class="column is-3">
+        <video id="matting-video" autoplay muted loop height="100%">
+          <source src="./static/videos/slide_1.mp4" type="video/mp4">
+        </video>
+        <h3 class="title is-4 has-text-justified"> Sliding-Single-Layer </h3>
+      </div>
+
+    </div>
+
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-full-hd">
+    <h2 class="title is-3 has-text-centered">Real-World Experiments</h2>
+
+    <div class="columns is-centered has-text-centered">
+
+      <div class="column is-3">
+        <video id="matting-video" autoplay muted loop height="100%">
+          <source src="./static/videos/real_paper_wya.mp4" type="video/mp4">
+        </video>
+        <h3 class="title is-4 has-text-justified"> Separating-Sim </h3>
+      </div>
+
+      <div class="column is-3">
+        <video id="matting-video" autoplay muted loop height="100%">
+          <source src="./static/videos/real_paper_wya.mp4" type="video/mp4">
+        </video>
+        <h3 class="title is-4 has-text-justified"> Separating-Real </h3>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            <!-- This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>. -->
+            Website built upon <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>' open-source template.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
